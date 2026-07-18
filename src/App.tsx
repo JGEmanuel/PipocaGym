@@ -6,6 +6,7 @@ import { PlanList } from './pages/PlanList'
 import { PhaseList } from './pages/PhaseList'
 import { DayList } from './pages/DayList'
 import { DayExecution } from './pages/DayExecution'
+import { Progress } from './pages/Progress'
 
 export function App() {
   return (
@@ -14,6 +15,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/gestao" element={<UploadPlanPage />} />
+          <Route path="/progresso" element={<Progress />} />
           <Route path="/planos/:profileId" element={<PlanList />} />
           <Route path="/planos/:profileId/:planId" element={<PhaseList />} />
           <Route path="/planos/:profileId/:planId/:phaseId" element={<DayList />} />

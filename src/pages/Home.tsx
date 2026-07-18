@@ -38,6 +38,15 @@ export function Home() {
         </h1>
         <div className="flex items-center gap-1">
           <Link
+            to="/progresso"
+            aria-label="Progresso"
+            className="flex size-10 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-stone-200 active:scale-95 dark:text-stone-400 dark:hover:bg-stone-800"
+          >
+            <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 3v18h18M7 15l4-5 3 3 5-7" />
+            </svg>
+          </Link>
+          <Link
             to="/gestao"
             aria-label="Gestão de treinos"
             className="flex size-10 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-stone-200 active:scale-95 dark:text-stone-400 dark:hover:bg-stone-800"
