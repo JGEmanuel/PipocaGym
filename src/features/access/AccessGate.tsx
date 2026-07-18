@@ -1,24 +1,40 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { getAccessKey, saveAccessKey } from '../../lib/accessKey'
+import { validateAccessKey } from '../../lib/supabase'
 
 /**
  * Bloqueia o app até que a chave de acesso compartilhada seja informada.
- * A chave é enviada em todas as requisições ao Supabase (header x-access-key)
- * e validada pelas políticas RLS do banco — aqui só é coletada e armazenada.
+ * A chave é validada contra o banco (políticas RLS) antes de ser salva
+ * e passa a ser enviada em todas as requisições (header x-access-key).
  */
 export function AccessGate({ children }: { children: ReactNode }) {
-  const [hasKey, setHasKey] = useState(() => Boolean(getAccessKey()))
+  const [hasKey] = useState(() => Boolean(getAccessKey()))
   const [value, setValue] = useState('')
+  const [checking, setChecking] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   if (hasKey) return children
 
-  function submit(e: FormEvent) {
+  async function submit(e: FormEvent) {
     e.preventDefault()
-    if (!value.trim()) return
-    saveAccessKey(value)
-    // Recarrega para que o cliente Supabase seja criado já com o header
-    window.location.reload()
-    setHasKey(true)
+    const key = value.trim()
+    if (!key || checking) return
+    setChecking(true)
+    setError(null)
+    try {
+      const valid = await validateAccessKey(key)
+      if (!valid) {
+        setError('Chave inválida. Confira e tente novamente.')
+        return
+      }
+      saveAccessKey(key)
+      // Recarrega para que o cliente Supabase seja criado já com o header
+      window.location.reload()
+    } catch {
+      setError('Não foi possível verificar a chave. Confira sua conexão.')
+    } finally {
+      setChecking(false)
+    }
   }
 
   return (
@@ -40,11 +56,13 @@ export function AccessGate({ children }: { children: ReactNode }) {
             autoFocus
             className="rounded-xl border border-stone-300 bg-white px-4 py-3 text-center outline-none transition-colors focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 dark:border-stone-700 dark:bg-stone-900"
           />
+          {error && <p className="text-sm text-red-500">{error}</p>}
           <button
             type="submit"
-            className="rounded-xl bg-amber-500 px-4 py-3 font-semibold text-white transition-transform hover:bg-amber-600 active:scale-[0.98]"
+            disabled={checking}
+            className="rounded-xl bg-amber-500 px-4 py-3 font-semibold text-white transition-transform hover:bg-amber-600 active:scale-[0.98] disabled:opacity-60"
           >
-            Entrar
+            {checking ? 'Verificando…' : 'Entrar'}
           </button>
         </form>
       </div>
