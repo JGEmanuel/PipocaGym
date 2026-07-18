@@ -5,7 +5,7 @@ em sessões separadas do Claude Code, com modelos diferentes.
 
 | | Etapa 1 — Planejamento | Etapa 2 — Execução |
 |---|---|---|
-| Comando | `/planejar <descrição>` | `/executar <id ou slug>` |
+| Comando | `/planning7 <descrição>` | `/run7 <id ou slug>` |
 | Modelo | avançado (ex.: Opus) | objetivo e barato (ex.: Sonnet/Haiku) |
 | Entregável | arquivo em `docs/plans/` | código funcionando + commits |
 | Escreve código? | **não** | sim |
@@ -34,13 +34,13 @@ não improvisa um redesenho.
 
 ## Fluxo prático no Claude Code Desktop
 
-1. Sessão A, modelo avançado → `/planejar quero marcar exercício como concluído`
+1. Sessão A, modelo avançado → `/planning7 quero marcar exercício como concluído`
    Ao final existe `docs/plans/003-marcar-exercicio-concluido.md` commitado.
 2. **Nova sessão** (`/clear` ou aba nova), trocar o modelo para o mais barato →
-   `/executar 003`
-3. Se a execução parar no meio, é só rodar `/executar 003` de novo: os checkboxes
+   `/run7 003`
+3. Se a execução parar no meio, é só rodar `/run7 003` de novo: os checkboxes
    marcados no plano dizem onde retomar.
 
 > Dá para fixar o modelo por comando, adicionando `model: opus` ou `model: sonnet`
-> no frontmatter de `.claude/commands/planejar.md` / `executar.md`. Está desligado
+> no frontmatter de `.claude/commands/planning7.md` / `run7.md`. Está desligado
 > de propósito — a escolha do modelo é manual.

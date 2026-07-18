@@ -52,5 +52,5 @@ nenhuma memória desta conversa**. Isso significa:
 
 ### 4. Feche
 Mostre ao usuário: o caminho do arquivo, um resumo curto das decisões travadas e o
-comando exato para a próxima etapa (`/executar NNN`). Lembre-o de abrir uma **sessão
+comando exato para a próxima etapa (`/run7 NNN`). Lembre-o de abrir uma **sessão
 nova** e trocar o modelo antes de executar.

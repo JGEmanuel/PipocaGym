@@ -17,13 +17,13 @@ O projeto é escrito em português — código, commits e documentação.
 Features novas, recursos e tarefas complexas são **sempre** divididas em duas etapas,
 executadas em sessões separadas:
 
-1. **Planejamento** — `/planejar <descrição>`. Análise crítica da solicitação e entrega de
+1. **Planejamento** — `/planning7 <descrição>`. Análise crítica da solicitação e entrega de
    um plano autossuficiente em `docs/plans/NNN-slug.md`. **Nenhum código de produção é
    escrito nesta etapa.**
-2. **Execução** — `/executar <NNN>`, em sessão nova. Implementa o plano, fase a fase,
+2. **Execução** — `/run7 <NNN>`, em sessão nova. Implementa o plano, fase a fase,
    com commit por fase.
 
-Se o usuário pedir uma feature ou tarefa complexa diretamente, sem usar `/planejar`,
+Se o usuário pedir uma feature ou tarefa complexa diretamente, sem usar `/planning7`,
 **proponha a Etapa 1 antes de começar a codificar.** Ele pode dispensar — mas a proposta
 é sua responsabilidade.
 
