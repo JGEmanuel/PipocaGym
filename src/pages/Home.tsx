@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { Link } from 'react-router-dom'
 import { ThemeToggle } from '../components/ThemeToggle'
 import { clearAccessKey } from '../lib/accessKey'
 import { supabase } from '../lib/supabase'
@@ -35,7 +36,18 @@ export function Home() {
           <span className="mr-1.5">🐾</span>
           Pipoca <span className="text-amber-500">Gym</span>
         </h1>
-        <ThemeToggle />
+        <div className="flex items-center gap-1">
+          <Link
+            to="/gestao"
+            aria-label="Gestão de treinos"
+            className="flex size-10 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-stone-200 active:scale-95 dark:text-stone-400 dark:hover:bg-stone-800"
+          >
+            <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" />
+            </svg>
+          </Link>
+          <ThemeToggle />
+        </div>
       </header>
 
       <main className="mt-10 flex flex-1 flex-col">
