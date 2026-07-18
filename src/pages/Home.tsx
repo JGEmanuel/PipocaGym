@@ -1,6 +1,6 @@
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import { ThemeToggle } from '../components/ThemeToggle'
 import { clearAccessKey } from '../lib/accessKey'
 import { supabase } from '../lib/supabase'
 import type { Profile } from '../lib/types'
@@ -11,7 +11,12 @@ const CARD_STYLES: Record<string, string> = {
   amber: 'from-amber-500/15 to-amber-500/5 border-amber-500/30',
 }
 
+const NICKNAMES: Record<string, string> = { Josana: 'Megera' }
+
 export function Home() {
+  // Sorteado uma vez por acesso à página: ora o nome, ora o apelido.
+  const [useNickname] = useState(() => Math.random() < 0.5)
+
   const { data: profiles, isLoading, isError } = useQuery({
     queryKey: ['profiles'],
     queryFn: async () => {
@@ -30,36 +35,8 @@ export function Home() {
   }
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-5 pb-8 pt-4">
-      <header className="flex items-center justify-between">
-        <h1 className="text-2xl font-extrabold tracking-tight">
-          <span className="mr-1.5">🐾</span>
-          Pipoca <span className="text-amber-500">Gym</span>
-        </h1>
-        <div className="flex items-center gap-1">
-          <Link
-            to="/progresso"
-            aria-label="Progresso"
-            className="flex size-10 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-stone-200 active:scale-95 dark:text-stone-400 dark:hover:bg-stone-800"
-          >
-            <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 3v18h18M7 15l4-5 3 3 5-7" />
-            </svg>
-          </Link>
-          <Link
-            to="/gestao"
-            aria-label="Gestão de treinos"
-            className="flex size-10 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-stone-200 active:scale-95 dark:text-stone-400 dark:hover:bg-stone-800"
-          >
-            <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" />
-            </svg>
-          </Link>
-          <ThemeToggle />
-        </div>
-      </header>
-
-      <main className="mt-10 flex flex-1 flex-col">
+    <div className="mx-auto flex min-h-[calc(100dvh-3.5rem)] w-full max-w-md flex-col px-5 pb-8 pt-4">
+      <main className="mt-6 flex flex-1 flex-col">
         <h2 className="text-lg font-semibold">Quem vai treinar hoje?</h2>
 
         {isLoading && (
@@ -87,7 +64,7 @@ export function Home() {
                 className={`flex aspect-square flex-col items-center justify-center gap-3 rounded-3xl border bg-gradient-to-b text-lg font-semibold transition-transform hover:scale-[1.02] active:scale-[0.97] ${CARD_STYLES[p.color] ?? CARD_STYLES.amber}`}
               >
                 <span className="text-5xl">{p.gender === 'm' ? '🏋️‍♂️' : '🏋️‍♀️'}</span>
-                {p.name}
+                {useNickname && NICKNAMES[p.name] ? NICKNAMES[p.name] : p.name}
               </Link>
             ))}
           </div>

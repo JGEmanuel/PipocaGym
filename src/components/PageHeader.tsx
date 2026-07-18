@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export function PageHeader({ back, title, subtitle }: { back: string; title: string; subtitle?: string }) {
   return (
-    <header className="flex items-center gap-3">
+    <header className="sticky top-14 z-20 -mx-5 flex h-14 items-center gap-3 bg-white/85 px-5 backdrop-blur dark:bg-stone-950/85">
       <Link
         to={back}
         aria-label="Voltar"

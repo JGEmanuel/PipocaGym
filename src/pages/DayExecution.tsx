@@ -50,9 +50,7 @@ export function DayExecution() {
     <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-5 pb-10 pt-4">
       <PageHeader back={`/planos/${profileId}/${planId}/${phaseId}`} title={dayName ?? 'Treino'} />
 
-      <div className="mt-4">
-        <SessionBar profileId={profileId} dayId={dayId} session={session ?? null} onChange={setSession} />
-      </div>
+      <SessionBar profileId={profileId} dayId={dayId} session={session ?? null} onChange={setSession} />
 
       {isLoading && (
         <div className="flex flex-col gap-4">

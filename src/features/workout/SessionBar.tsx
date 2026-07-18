@@ -59,7 +59,7 @@ export function SessionBar({
   }
 
   return (
-    <div className="sticky top-0 z-10 -mx-5 mb-4 border-b border-stone-200 bg-white/85 px-5 py-3 backdrop-blur dark:border-stone-800 dark:bg-stone-950/85">
+    <div className="sticky top-28 z-10 -mx-5 mb-4 mt-4 border-b border-stone-200 bg-white/85 px-5 py-3 backdrop-blur dark:border-stone-800 dark:bg-stone-950/85">
       {error && <p className="mb-2 text-xs text-red-500">{error}</p>}
 
       {!session && (
