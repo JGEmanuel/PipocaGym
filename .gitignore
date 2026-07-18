@@ -1,0 +1,22 @@
+# Claude Code local settings (machine-specific, not shared)
+.claude/settings.local.json
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies (uncomment/adjust once the stack is defined)
+node_modules/
