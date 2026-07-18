@@ -16,6 +16,17 @@ export interface PlanRow {
   active: boolean
 }
 
+export async function fetchActivePlans(profileId: string): Promise<PlanRow[]> {
+  const { data, error } = await supabase
+    .from('plans')
+    .select('id, title, created_at, active')
+    .eq('profile_id', profileId)
+    .eq('active', true)
+    .order('created_at', { ascending: false })
+  if (error) throw error
+  return data
+}
+
 export async function fetchPlans(profileId: string): Promise<PlanRow[]> {
   const { data, error } = await supabase
     .from('plans')

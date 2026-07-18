@@ -41,8 +41,13 @@ function splitByH3(lines: string[]): Section[] {
 }
 
 function parseGuideSection(section: Section, kind: ParsedGuide['kind']): ParsedGuide[] {
+  // Ignora o parágrafo introdutório da seção (texto antes do primeiro ###),
+  // que não pertence a nenhum exercício/aquecimento específico.
+  const firstHeadingIdx = section.bodyLines.findIndex((l) => /^###\s+/.test(l))
+  const relevantLines = firstHeadingIdx === -1 ? [] : section.bodyLines.slice(firstHeadingIdx)
+
   const chunks: string[][] = [[]]
-  for (const line of section.bodyLines) {
+  for (const line of relevantLines) {
     if (line.trim() === '---') {
       chunks.push([])
     } else {

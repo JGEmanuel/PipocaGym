@@ -72,20 +72,17 @@ export function Home() {
         {profiles && profiles.length > 0 && (
           <div className="mt-4 grid grid-cols-2 gap-4">
             {profiles.map((p) => (
-              <button
+              <Link
                 key={p.id}
+                to={`/planos/${p.id}`}
                 className={`flex aspect-square flex-col items-center justify-center gap-3 rounded-3xl border bg-gradient-to-b text-lg font-semibold transition-transform hover:scale-[1.02] active:scale-[0.97] ${CARD_STYLES[p.color] ?? CARD_STYLES.amber}`}
               >
                 <span className="text-5xl">{p.gender === 'm' ? '🏋️‍♂️' : '🏋️‍♀️'}</span>
                 {p.name}
-              </button>
+              </Link>
             ))}
           </div>
         )}
-
-        <p className="mt-6 text-sm text-stone-500 dark:text-stone-400">
-          Os treinos aparecem aqui após a carga dos planos (Fase 1).
-        </p>
       </main>
 
       <footer className="mt-10 text-center text-xs text-stone-400 dark:text-stone-600">
